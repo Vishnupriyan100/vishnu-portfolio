@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio of Vishnu Priyan A, a final-year Cyber Security student focused on networking, secure software, IoT security, and development.">
+  <meta name="author" content="Vishnu Priyan A">
+  <meta name="theme-color" content="#2563eb">
   <title>Vishnu Priyan A | Portfolio</title>
 
   <style>
@@ -2609,6 +2612,29 @@ section.reveal.visible {
       }
     }
 
+
+  /* Professional portfolio typography and hero layout */
+  html, body, button, input, textarea, select,
+  .brand-text h2, .brand-text p, .nav-links a, .hero-badge, .hero h1, .hero h2,
+  .hero p, .meta-chip, .btn, .social-btn, .visual-card, .console-label, .console-text,
+  .section-head h2, .section-head p, .about-card, .skill-card, .tool-card, .project-card,
+  .info-card, .tag, .mini-btn, footer {
+    font-family: "Times New Roman", Times, serif !important;
+  }
+  .hero { padding-top: 42px !important; padding-bottom: 42px !important; }
+  .hero-layout { align-items: center !important; min-height: calc(100vh - 118px) !important; transform: translateY(-18px); }
+  .hero h1 { font-size: clamp(2.7rem, 5.2vw, 4.6rem) !important; font-weight: 500 !important; letter-spacing: -0.4px !important; line-height: 1 !important; margin-bottom: 14px !important; }
+  .hero h2 { margin-bottom: 14px !important; font-weight: 700 !important; }
+  .hero p.desc { margin-bottom: 18px !important; line-height: 1.72 !important; }
+  .meta-row { margin-bottom: 22px !important; }
+  .hero-actions { margin-bottom: 20px !important; }
+  .hero-visual { min-height: 520px !important; transform: translateY(-8px); }
+  .orbital-bg { width: min(430px, 90%) !important; }
+  .center-portrait { width: 238px !important; height: 238px !important; }
+  .brand-mark { font-family: Consolas, monospace !important; font-size: 1rem !important; letter-spacing: -1px !important; }
+  @media (max-width: 1100px) { .hero-layout { transform: none !important; min-height: auto !important; } .hero-visual { transform: none !important; } }
+  @media (max-width: 760px) { .hero { padding-top: 34px !important; } .hero-layout { min-height: auto !important; } .hero h1 { font-size: clamp(2.2rem, 11vw, 3.4rem) !important; } }
+
 </style>
 </head>
 
@@ -2641,7 +2667,7 @@ section.reveal.visible {
         <div class="hero-copy">
           <p class="small-title">HELLO, I'M</p>
           <h1>Vishnu Priyan A</h1>
-          <h2>Cybersecurity Student | Developer | Designer | Tech Blogger</h2>
+          <h2>Cyber Security Student | Developer | Network &amp; IoT Security</h2>
           <p>
             I am a final-year Cybersecurity student interested in software development,
             web technologies, networking and cybersecurity. I enjoy building secure,
@@ -2893,112 +2919,40 @@ section.reveal.visible {
   <!-- Projects -->
   <section id="projects">
     <div class="container">
-
-      <h2 class="section-title">Projects</h2>
-      <div class="section-line"></div>
-
+      <div class="section-head reveal">
+        <div class="section-line"></div>
+        <h2>Projects</h2>
+        <p>Selected cybersecurity and development projects with source code and ongoing final-year work.</p>
+      </div>
       <div class="projects-grid">
-        <!-- PROJECT 01 -->
-        <article class="project-showcase-card project-one">
-          <div class="project-number">PROJECT 01</div>
-
-          <div class="project-symbol">◉</div>
-
-          <div class="project-content">
-            <h3>Network Scanner</h3>
-
-            <p>
-              A network scanning tool designed to identify connected devices,
-              IP addresses, open ports and potential vulnerabilities in a network.
-            </p>
-
-            <div class="project-tags">
-              <span>Python</span>
-              <span>Linux</span>
-              <span>Networking</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- PROJECT 02 -->
-        <article class="project-showcase-card">
-          <div class="project-number">PROJECT 02</div>
-
-          <div class="project-symbol">✦</div>
-
-          <div class="project-content">
-            <h3>Online Resume Builder</h3>
-
-            <p>
-              A web application that allows users to create professional resumes
-              and manage profile information online through a simple interface.
-            </p>
-
-            <div class="project-tags">
-              <span>HTML</span>
-              <span>CSS</span>
-              <span>PHP</span>
-              <span>MySQL</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- PROJECT 03 -->
-        <article class="project-showcase-card">
-          <div class="project-number">PROJECT 03</div>
-
-          <div class="project-symbol">◎</div>
-
-          <div class="project-content">
-            <h3>Smart Attendance System</h3>
-
-            <p>
-              An automated attendance system using real-time face detection and
-              facial recognition to identify users and record attendance accurately.
-            </p>
-
-            <div class="project-tags">
-              <span>Python</span>
-              <span>OpenCV</span>
-              <span>SQLite</span>
-              <span>Tkinter</span>
-            </div>
-
-            <a href="https://github.com/Vishnupriyan100/Smart-attendance-system-"
-               target="_blank" rel="noopener"
-               class="project-github-link">
-              GitHub ↗
-            </a>
-          </div>
-        </article>
-
-        <!-- PROJECT 04 -->
-        <article class="project-showcase-card current-showcase-card">
-          <div class="project-top-row">
-            <div class="project-number">PROJECT 04</div>
-            <span class="current-pill">CURRENT PROJECT</span>
-          </div>
-
-          <div class="project-symbol">∞</div>
-
-          <div class="project-content">
-            <h3>AI-Based Intrusion Detection System for IoT Network</h3>
-
-            <p>
-              An AI-based intrusion detection system that monitors IoT network
-              traffic and classifies activity as NORMAL or ATTACK using a
-              Random Forest machine-learning model.
-            </p>
-
-            <div class="project-tags">
-              <span>Python</span>
-              <span>Random Forest</span>
-              <span>FastAPI</span>
-              <span>IoT</span>
-            </div>
-          </div>
-        </article>
-</div>
+        <div class="glass-card project-card current-project reveal">
+          <div class="project-top"><div class="project-no">PROJECT 01</div><div class="project-badge">Final-Year Project</div></div>
+          <h3>AI-Based Intrusion Detection System for IoT Network</h3>
+          <p>AI-driven intrusion detection project that classifies IoT network traffic as NORMAL or ATTACK using a Random Forest model, FastAPI backend, monitoring dashboard, networking, and Raspberry Pi integration.</p>
+          <div class="project-tags"><span class="tag">Python</span><span class="tag">Random Forest</span><span class="tag">FastAPI</span><span class="tag">IoT Security</span><span class="tag">Raspberry Pi</span></div>
+        </div>
+        <div class="glass-card project-card reveal">
+          <div class="project-top"><div class="project-no">PROJECT 02</div><div class="project-badge">Cybersecurity</div></div>
+          <h3>Network Port Scanner</h3>
+          <p>A Python-based network scanning and analysis tool for identifying hosts, IP addresses, open ports, and services to support basic network visibility and security assessment.</p>
+          <div class="project-tags"><span class="tag">Python</span><span class="tag">Networking</span><span class="tag">Port Scanning</span><span class="tag">Security</span></div>
+          <div class="project-link-row"><a href="https://github.com/Vishnupriyan100/Port-scanning-" target="_blank" rel="noopener noreferrer" class="mini-btn">View Repository ↗</a></div>
+        </div>
+        <div class="glass-card project-card reveal">
+          <div class="project-top"><div class="project-no">PROJECT 03</div><div class="project-badge">Security Lab</div></div>
+          <h3>Pentesting on ColdBox</h3>
+          <p>A practical penetration-testing project documenting reconnaissance, enumeration, vulnerability analysis, exploitation, and security findings in a controlled lab environment.</p>
+          <div class="project-tags"><span class="tag">Kali Linux</span><span class="tag">Enumeration</span><span class="tag">Pentesting</span><span class="tag">Security</span></div>
+          <div class="project-link-row"><a href="https://github.com/Vishnupriyan100/Pentesting-on-coldbox" target="_blank" rel="noopener noreferrer" class="mini-btn">View Repository ↗</a></div>
+        </div>
+        <div class="glass-card project-card reveal">
+          <div class="project-top"><div class="project-no">PROJECT 04</div><div class="project-badge">Computer Vision</div></div>
+          <h3>Smart Attendance System</h3>
+          <p>An automated attendance system that uses facial recognition to identify students and record attendance efficiently through a Python-based desktop workflow.</p>
+          <div class="project-tags"><span class="tag">Python</span><span class="tag">OpenCV</span><span class="tag">SQLite</span><span class="tag">Tkinter</span></div>
+          <div class="project-link-row"><a href="https://github.com/Vishnupriyan100/Smart-attendance-system-" target="_blank" rel="noopener noreferrer" class="mini-btn">View Repository ↗</a></div>
+        </div>
+      </div>
     </div>
   </section>
 
