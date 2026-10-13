@@ -1,0 +1,33 @@
+name: Import resume asset
+
+on:
+  push:
+    paths:
+      - '.github/workflows/import-resume.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  import-resume:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout portfolio
+        uses: actions/checkout@v4
+
+      - name: Copy resume into portfolio assets
+        run: |
+          mkdir -p assets
+          curl -L --fail "https://raw.githubusercontent.com/Vishnupriyan100/Resume/main/vishnu.resume.pdf" -o assets/Vishnu_Priyan_Resume.pdf
+
+      - name: Commit resume asset
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/Vishnu_Priyan_Resume.pdf
+          if git diff --cached --quiet; then
+            echo "Resume asset already up to date."
+          else
+            git commit -m "Add resume asset to portfolio"
+            git push
+          fi
