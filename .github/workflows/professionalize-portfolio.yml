@@ -1,0 +1,158 @@
+name: Professionalize portfolio
+
+on:
+  push:
+    paths:
+      - '.github/workflows/professionalize-portfolio.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Apply professional portfolio updates
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          path = Path('index.html')
+          html = path.read_text(encoding='utf-8')
+
+          # Professional metadata.
+          if 'name="description"' not in html:
+              html = re.sub(
+                  r'(<meta[^>]+name=["\']viewport["\'][^>]*>)',
+                  r'\1\n  <meta name="description" content="Portfolio of Vishnu Priyan A, a final-year Cyber Security student focused on networking, secure software, IoT security, and development.">\n  <meta name="author" content="Vishnu Priyan A">\n  <meta name="theme-color" content="#2563eb">',
+                  html,
+                  count=1,
+                  flags=re.I,
+              )
+
+          # Use the GitHub profile image instead of a multi-megabyte embedded portrait.
+          html = re.sub(
+              r'(<div class=["\']center-portrait["\']>\s*<img\s+src=["\'])data:image/[^;]+;base64,[^"\']+(["\'][^>]*>)',
+              r'\1https://avatars.githubusercontent.com/u/192064855?v=4\2',
+              html,
+              count=1,
+              flags=re.I | re.S,
+          )
+
+          # Resume is now stored as a normal repository asset.
+          html = re.sub(
+              r'href=["\']data:application/pdf;base64,[^"\']+["\']',
+              'href="assets/Vishnu_Priyan_Resume.pdf"',
+              html,
+              count=1,
+              flags=re.I | re.S,
+          )
+
+          # Recruiter-focused title line.
+          html = re.sub(
+              r'(<header[^>]*id=["\']home["\'][\s\S]*?<h2>).*?(</h2>)',
+              r'\1Cyber Security Student | Developer | Network &amp; IoT Security\2',
+              html,
+              count=1,
+              flags=re.I,
+          )
+
+          # Replace the old project section with a focused project portfolio.
+          projects = '''<section id="projects">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-line"></div>
+        <h2>Projects</h2>
+        <p>Selected cybersecurity and development projects with source code and ongoing final-year work.</p>
+      </div>
+      <div class="projects-grid">
+        <div class="glass-card project-card current-project reveal">
+          <div class="project-top"><div class="project-no">PROJECT 01</div><div class="project-badge">Final-Year Project</div></div>
+          <h3>AI-Based Intrusion Detection System for IoT Network</h3>
+          <p>AI-driven intrusion detection project that classifies IoT network traffic as NORMAL or ATTACK using a Random Forest model, FastAPI backend, monitoring dashboard, networking, and Raspberry Pi integration.</p>
+          <div class="project-tags"><span class="tag">Python</span><span class="tag">Random Forest</span><span class="tag">FastAPI</span><span class="tag">IoT Security</span><span class="tag">Raspberry Pi</span></div>
+        </div>
+        <div class="glass-card project-card reveal">
+          <div class="project-top"><div class="project-no">PROJECT 02</div><div class="project-badge">Cybersecurity</div></div>
+          <h3>Network Port Scanner</h3>
+          <p>A Python-based network scanning and analysis tool for identifying hosts, IP addresses, open ports, and services to support basic network visibility and security assessment.</p>
+          <div class="project-tags"><span class="tag">Python</span><span class="tag">Networking</span><span class="tag">Port Scanning</span><span class="tag">Security</span></div>
+          <div class="project-link-row"><a href="https://github.com/Vishnupriyan100/Port-scanning-" target="_blank" rel="noopener noreferrer" class="mini-btn">View Repository ↗</a></div>
+        </div>
+        <div class="glass-card project-card reveal">
+          <div class="project-top"><div class="project-no">PROJECT 03</div><div class="project-badge">Security Lab</div></div>
+          <h3>Pentesting on ColdBox</h3>
+          <p>A practical penetration-testing project documenting reconnaissance, enumeration, vulnerability analysis, exploitation, and security findings in a controlled lab environment.</p>
+          <div class="project-tags"><span class="tag">Kali Linux</span><span class="tag">Enumeration</span><span class="tag">Pentesting</span><span class="tag">Security</span></div>
+          <div class="project-link-row"><a href="https://github.com/Vishnupriyan100/Pentesting-on-coldbox" target="_blank" rel="noopener noreferrer" class="mini-btn">View Repository ↗</a></div>
+        </div>
+        <div class="glass-card project-card reveal">
+          <div class="project-top"><div class="project-no">PROJECT 04</div><div class="project-badge">Computer Vision</div></div>
+          <h3>Smart Attendance System</h3>
+          <p>An automated attendance system that uses facial recognition to identify students and record attendance efficiently through a Python-based desktop workflow.</p>
+          <div class="project-tags"><span class="tag">Python</span><span class="tag">OpenCV</span><span class="tag">SQLite</span><span class="tag">Tkinter</span></div>
+          <div class="project-link-row"><a href="https://github.com/Vishnupriyan100/Smart-attendance-system-" target="_blank" rel="noopener noreferrer" class="mini-btn">View Repository ↗</a></div>
+        </div>
+      </div>
+    </div>
+  </section>'''
+
+          new_html, count = re.subn(
+              r'<section\s+id=["\']projects["\'][\s\S]*?</section>',
+              projects,
+              html,
+              count=1,
+              flags=re.I,
+          )
+          if count:
+              html = new_html
+
+          # Preserve the new portfolio's Times New Roman presentation and first-screen sizing.
+          css = '''
+
+  /* Professional portfolio typography and hero layout */
+  html, body, button, input, textarea, select,
+  .brand-text h2, .brand-text p, .nav-links a, .hero-badge, .hero h1, .hero h2,
+  .hero p, .meta-chip, .btn, .social-btn, .visual-card, .console-label, .console-text,
+  .section-head h2, .section-head p, .about-card, .skill-card, .tool-card, .project-card,
+  .info-card, .tag, .mini-btn, footer {
+    font-family: "Times New Roman", Times, serif !important;
+  }
+  .hero { padding-top: 42px !important; padding-bottom: 42px !important; }
+  .hero-layout { align-items: center !important; min-height: calc(100vh - 118px) !important; transform: translateY(-18px); }
+  .hero h1 { font-size: clamp(2.7rem, 5.2vw, 4.6rem) !important; font-weight: 500 !important; letter-spacing: -0.4px !important; line-height: 1 !important; margin-bottom: 14px !important; }
+  .hero h2 { margin-bottom: 14px !important; font-weight: 700 !important; }
+  .hero p.desc { margin-bottom: 18px !important; line-height: 1.72 !important; }
+  .meta-row { margin-bottom: 22px !important; }
+  .hero-actions { margin-bottom: 20px !important; }
+  .hero-visual { min-height: 520px !important; transform: translateY(-8px); }
+  .orbital-bg { width: min(430px, 90%) !important; }
+  .center-portrait { width: 238px !important; height: 238px !important; }
+  .brand-mark { font-family: Consolas, monospace !important; font-size: 1rem !important; letter-spacing: -1px !important; }
+  @media (max-width: 1100px) { .hero-layout { transform: none !important; min-height: auto !important; } .hero-visual { transform: none !important; } }
+  @media (max-width: 760px) { .hero { padding-top: 34px !important; } .hero-layout { min-height: auto !important; } .hero h1 { font-size: clamp(2.2rem, 11vw, 3.4rem) !important; } }
+'''
+          if 'Professional portfolio typography and hero layout' not in html:
+              html = html.replace('</style>', css + '\n</style>', 1)
+
+          # Add safer external-link behavior.
+          html = re.sub(r'target=["\']_blank["\'](?![^>]*\brel=)', 'target="_blank" rel="noopener noreferrer"', html, flags=re.I)
+
+          path.write_text(html, encoding='utf-8')
+
+      - name: Remove one-time workflow files
+        run: |
+          rm -f .github/workflows/import-resume.yml
+          rm -f .github/workflows/professionalize-portfolio.yml
+
+      - name: Commit professional portfolio
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html assets/Vishnu_Priyan_Resume.pdf .github/workflows || true
+          git commit -m "Professionalize portfolio and project showcase"
+          git push
